@@ -1,3 +1,13 @@
-img {
-  width: 33vw;
+body {
+  border: 1px solid black
+}
+
+img,
+#name div {
+  width: 30vw;
+}
+
+#names {
+  display: flex;
+  justify-content:space-between
 }
