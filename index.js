@@ -17,6 +17,7 @@ function getRandomName() {
 
 const imageDiv = document.createElement("DIV")
 const nameDiv  = document.createElement("DIV")
+imageDiv.id = 'img'
 nameDiv.id = "names"
 document.body.appendChild(imageDiv)
 document.body.appendChild(nameDiv)
@@ -29,35 +30,52 @@ for ( let ii = 0; ii < 3; ii += 1 ) {
   const src = `/img/${name}.jpg`
   image.src = src
   imageDiv.appendChild(image)
-
-  // Remember the names for later
   nameArray.push(name)
+  const srcName = src.slice(5, -4)
+  image.alt = srcName
 }
 
 shuffle(nameArray)
-console.log("nameArray:", nameArray);
+
 
 nameArray.forEach( name => {
   const div = document.createElement("DIV")
-
-  div.textContent = name
-  // div.addEventListener("mousedown", startingToDrag)
-
-  // The `dragstart` event requires a `draggable` property
-  // to be set on the element, otherwise it will not be
-  // triggered
-  div.draggable="true"
-  div.addEventListener("dragstart", startingToDrag)
-
+  div.draggable = "true";
   nameDiv.appendChild(div)
+  const dataSpan = document.createElement('span')
+  dataSpan.innerHTML = name
+  div.appendChild(dataSpan)
 })
 
+// let nodes = nameDiv.childNodes
+// for (let i = 0; i < nodes.length; i++) {
+//   nodes[i].classList = 'imgNames'
+// }
 
-function startingToDrag(event) {
-  event.preventDefault()
-  console.log("event:", event);
-}
 
+  const dragSource = document.getElementById("names");
+  dragSource.addEventListener("dragstart", (e) => {
+    e.target.classList.add("dragging");
+    dragged = e.target;
+  });
+
+  dragSource.addEventListener("dragend", (e) => {
+    e.target.classList.remove("dragging");
+  });
+
+  const dragTarget = document.getElementById("img");
+  dragTarget.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+
+  dragTarget.addEventListener("drop", (e) => {
+    e.preventDefault();
+    if (dragged.textContent !== e.target.alt) {
+      dragged.classList.add('noMatch')
+    }else{
+      dragged.classList.add("match");
+    }
+  });
 
 
 function shuffle (a) {

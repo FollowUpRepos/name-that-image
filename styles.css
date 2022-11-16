@@ -7,7 +7,40 @@ img,
   width: 30vw;
 }
 
+.imgNames {
+  width: 1fr;
+  background-color: red;
+}
+
 #names {
   display: flex;
-  justify-content:space-between
+  justify-content:space-around;
+  padding: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+  /* width: 3fr; */
+}
+
+span:hover {
+  color: blue;
+}
+
+.dragging {
+  opacity: .5;
+  border: 5px solid blue;
+  border-radius: 10px;
+  color: slategrey;
+}
+
+.noMatch {
+  color: red;
+}
+
+.match {
+  text-decoration: line-through;
+  color: green;
+}
+
+h1 span {
+  font-size: 1.5rem;
 }
